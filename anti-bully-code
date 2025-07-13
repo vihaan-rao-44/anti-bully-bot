@@ -1,0 +1,18 @@
+
+import openai
+from openai.types.chat import ChatCompletionMessageParam
+ 
+client = openai.OpenAI(api_key="Add your API key")
+
+def anti_bully_reply(bully_input):
+    messages: list[ChatCompletionMessageParam] = [
+        {"role": "system", "content": "You are a loyal, kind, and clever anti-bullying assistant who always supports the user, builds their confidence, and helps them come up with smart, calm responses and speaks like a brave best friend who always has their back."},
+        {"role": "user", "content": f"Someone said '{bully_input}'. What should I say back?"}
+    ]
+
+    response = client.chat.completions.create(
+        model="gpt-4",
+        messages=messages
+    )
+
+    return response.choices[0].message.content
